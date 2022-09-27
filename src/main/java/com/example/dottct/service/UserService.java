@@ -1,10 +1,12 @@
 package com.example.dottct.service;
 
+import com.example.dottct.LoginFailException;
 import com.example.dottct.model.dto.UserDto;
 import com.example.dottct.model.entity.User;
 import com.example.dottct.repository.UserRepository;
 import com.example.dottct.config.security.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,7 +25,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(username)
-                .orElseThrow(() -> new NoSuchElementException("Can not found user by email"));
+                .orElseThrow(() -> new LoginFailException("Can not found user by email", HttpStatus.UNAUTHORIZED));
 
         return CustomUserDetails.builder()
                 .email(user.getEmail())
