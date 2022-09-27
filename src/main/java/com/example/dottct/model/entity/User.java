@@ -2,6 +2,7 @@ package com.example.dottct.model.entity;
 
 import com.example.dottct.model.dto.UserDto;
 import com.example.dottct.util.DBAttributeConverter;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 
 @Entity(name = "users")
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
 
     @Id

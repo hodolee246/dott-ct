@@ -2,6 +2,7 @@ package com.example.dottct.controller;
 
 import com.example.dottct.model.dto.UserDto;
 import com.example.dottct.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,13 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 
 @RestController
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @PostMapping("/signup")
     public ResponseEntity<Void> signup(@RequestBody UserDto userDto) {
@@ -26,7 +24,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<UserDto> login(Principal principal) {
         return ResponseEntity.ok(userService.getUserByEmail(principal.getName()));
     }

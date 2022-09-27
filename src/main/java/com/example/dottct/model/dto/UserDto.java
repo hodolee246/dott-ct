@@ -3,10 +3,8 @@ package com.example.dottct.model.dto;
 import com.example.dottct.model.entity.User;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.ToString;
 
 @Getter
-@ToString
 public class UserDto {
 
     private Long idx;
